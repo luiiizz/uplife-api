@@ -23,7 +23,7 @@ All other dependencies are listed in the `requirements.txt` file and can be inst
 
 - Setup Environment Variables;
 
-  - On `/uplife-api/uplife`
+  - On `/uplife-api/uplife/core`
 
     - Import or create a **.env** file
 
@@ -44,7 +44,7 @@ All other dependencies are listed in the `requirements.txt` file and can be inst
 - <details closed="true"><summary><h4>Virtual Env</h4></summary>
     - Create a virtual environment;
 
-      - On `/uplife-api/uplife`
+      - On `/uplife-api/`
         - `python -m venv venv`
         - Activate the venv
           - `.\venv\Scripts\activate`
@@ -69,7 +69,9 @@ All other dependencies are listed in the `requirements.txt` file and can be inst
     - On `/uplife-api/uplife`
       - ` python .\manage.py createsuperuser`
 
-  - Run the project - On `/uplife-api/uplife` - ` python .\manage.py runserver`
+  - Run the project 
+    - On `/uplife-api/uplife` 
+      - ` python .\manage.py runserver`
   </details>
 
 - <details closed="true">

@@ -1,13 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.response import Response
+
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.status import (
     HTTP_403_FORBIDDEN,
 )
 from rest_framework.exceptions import AuthenticationFailed
-
+from rest_framework.response import Response
 from users.models import User
 from users.serializers import SignUpSerializer, UserSerializer
 
@@ -19,6 +19,7 @@ from knox.auth import TokenAuthentication
 
 from django.contrib.auth.signals import user_logged_in
 from django.utils import timezone
+
 
 from drf_spectacular.utils import extend_schema
 

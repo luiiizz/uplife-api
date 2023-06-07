@@ -100,7 +100,6 @@ TEMPLATES = [
 # List of authentication backends
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
 # Setting up the WSGI application
@@ -187,9 +186,9 @@ SPECTACULAR_SETTINGS = {
         {"name": "Recipient Management | Bag", "description": "Manage Recipient Bag Types"},
         {"name": "Recipient Management | Medicine", "description": "Manage Recipient Accepted Medicines"},
         
+        {"name": "Donation Management | Appointment", "description": "Manage Donation Appointments"},
         {"name": "Donation Management | Blood", "description": "Manage Blood Donations"},
         {"name": "Donation Management | Medicine", "description": "Manage Medicine Donations"},
-        {"name": "Donation Management | Appointment", "description": "Manage Donation Appointments"},
         {"name": "Authentication", "description": "User Access/Creation"},
     ],
     "SERVERS": [

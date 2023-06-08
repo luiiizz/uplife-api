@@ -8,6 +8,12 @@ from .serializers import (
 )
 from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ReadOnlyModelViewSet
+from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
+from donations.models import DonationAppointment
+from donations.serializers import DonationAppointmentSerializer
+from users.models import User
 
 # Creating a view to list and create BloodDonations
 @extend_schema(tags=["Donation Management | Blood"])  # adds tags to the schema
@@ -59,3 +65,27 @@ class DonationAppointmentDetailView(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = DonationAppointment.objects.all() # gets all DonationAppointment objects from the database
     serializer_class = DonationAppointmentSerializer # uses the DonationAppointmentSerializer to serialize the data
+    
+    
+@extend_schema(tags=["Donation Management | Appointment"])
+@extend_schema(description="List all of a user's Appointments", methods=["GET"])
+class UserAppointmentsViewSet(ReadOnlyModelViewSet):
+    serializer_class = DonationAppointmentSerializer
+    queryset = DonationAppointment.objects.all()
+    
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        
+        user = get_object_or_404(User, pk=user_id)
+        return self.queryset.filter(donor=user)
+    
+    def list(self, request, user_id=None):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None, user_id=None):
+        queryset = self.get_queryset()
+        appointment = get_object_or_404(queryset, pk=pk)
+        serializer = self.get_serializer(appointment)
+        return Response(serializer.data)
